@@ -13,9 +13,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-i(zrpilp=1ka$-7dbj02&etbjl0-kl=$ceckgquvko)=1tq3gh'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["10.100.0.28"]
 
 
 # Application definition
@@ -28,10 +28,12 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'corsheaders',
     'infoimages',
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -40,6 +42,15 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:8000",
+    "http://localhost:3000",
+    "http://127.0.0.1:8000",
+    "http://10.100.0.28",
+]
+
+CORS_ALLOW_CREDENTIALS = True
 
 ROOT_URLCONF = 'myproject.urls'
 
@@ -67,12 +78,12 @@ WSGI_APPLICATION = 'myproject.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',  # MySQL backend
+        'ENGINE': 'django.db.backends.postgresql',  # MySQL backend
         'NAME': 'images',          # MySQL'da yaratilgan ma'lumotlar bazasi nomi
-        'USER': 'root',               # MySQL foydalanuvchi nomi
-        'PASSWORD': '12345',           # MySQL paroli
+        'USER': 'shox',               # MySQL foydalanuvchi nomi
+        'PASSWORD': '9382',           # MySQL paroli
         'HOST': 'localhost',                   # Agar server localhost bo'lsa
-        'PORT': '3306',                        # MySQL porti (odatiy 3306)
+        'PORT': '5432',                        # MySQL porti (odatiy 3306)
     }
 }
 
